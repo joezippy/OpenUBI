@@ -1,5 +1,8 @@
 async function getCandidateJSON(filename, stateKey) {
-  let response = await fetch(`./static/assets/${filename}.json`);
+  let response = await fetch(`./static/assets/${filename}.json`, {
+    // Always ignore the cache-control headers and fetch the uncached version so we have the latest data
+    cache: 'reload'
+  });
   let json = await response.json()
   if (filename === 'president') {
     return json;
